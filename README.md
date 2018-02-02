@@ -84,7 +84,7 @@
 ### Commands
 
 * Commands describe an intent to change the application's state. 
-* They are implemented as (preferably read-only) POJOs that are wrapped using one of the 'CommandMessage' implementations.
+* They are implemented as (preferably read-only) POJOs that are wrapped using one of the `CommandMessage` implementations.
 * Commands always have exactly one destination.
 * Command messages sent over the Command Bus allow for a result to be returned.
 
@@ -95,11 +95,11 @@
 * When something important has occurred within the Aggregate, it will raise an Event.
 * In Axon Framework, Events can be any object. You are highly encouraged to make sure all Events are serializable.
 
-* When Events are dispatched, Axon wraps them in an 'EventMessage'.
-* When an Event is raised by an 'Aggregate', it is wrapped in a 'DomainEventMessage' (which extends 'EventMessage').
+* When Events are dispatched, Axon wraps them in an `EventMessage`.
+* When an Event is raised by an `Aggregate`, it is wrapped in a `DomainEventMessage` (which extends `EventMessage`).
 * All other Events are wrapped in an EventMessage.
-* Aside from common 'Message' attributes like a unique Identifier an 'EventMessage' also contains a timestamp. 
-* The 'DomainEventMessage' additionally contains the type and identifier of the aggregate that raised the Event.
+* Aside from common `Message` attributes like a unique Identifier an `EventMessage` also contains a timestamp. 
+* The `DomainEventMessage` additionally contains the type and identifier of the aggregate that raised the Event.
 * It also contains the sequence number of the event in the aggregate's event stream, which allows the order of events to be reproduced.
 
 
