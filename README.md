@@ -29,7 +29,7 @@
 
 ##Architectural Overview
 * 
-![screenshot of Axom Architecture](axon-fundamentals/detailed-architecture-overview.png)
+![screenshot of Axom Architecture](https://github.com/mithun3/axon-fundamentals/blob/master/detailed-architecture-overview.png)
 * 
 * 
 * 
