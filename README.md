@@ -116,9 +116,9 @@
 * You are unlikely to need direct access to the Unit of Work.
 * It is mainly used by the building blocks that Axon provides.
 
-' #### Note
-
-Note that the Unit of Work is merely a buffer of changes, not a replacement for Transactions. Although all staged changes are only committed when the Unit of Work is committed, its commit is not atomic. That means that when a commit fails, some changes might have been persisted, while others are not. Best practices dictate that a Command should never contain more than one action. If you stick to that practice, a Unit of Work will contain a single action, making it safe to use as-is. If you have more actions in your Unit of Work, then you could consider attaching a transaction to the Unit of Work's commit. Use unitOfWork.onCommit(..) to register actions that need to be taken when the Unit of Work is being committed. '
+```
+Note that the Unit of Work is merely a buffer of changes, not a replacement for Transactions. Although all staged changes are only committed when the Unit of Work is committed, its commit is not atomic. That means that when a commit fails, some changes might have been persisted, while others are not. Best practices dictate that a Command should never contain more than one action. If you stick to that practice, a Unit of Work will contain a single action, making it safe to use as-is. If you have more actions in your Unit of Work, then you could consider attaching a transaction to the Unit of Work's commit. Use unitOfWork.onCommit(..) to register actions that need to be taken when the Unit of Work is being committed. 
+```
 
 * 
 * 
