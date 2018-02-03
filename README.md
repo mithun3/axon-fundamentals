@@ -6,6 +6,10 @@
 **[Architectural Overview](#architectural-verview)**<br>
 **[Messaging Concepts](#messaging-concepts)**<br>
 
+**[Command Model](#command-model)**<br>
+**[Messaging Concepts](#messaging-concepts)**<br>
+**[Messaging Concepts](#messaging-concepts)**<br>
+
 ## Axon Framework Background
 
 ### Brief History
@@ -87,6 +91,7 @@
 * They are implemented as (preferably read-only) POJOs that are wrapped using one of the `CommandMessage` implementations.
 * Commands always have exactly one destination.
 * Command messages sent over the Command Bus allow for a result to be returned.
+    - The reason being the sender does not care which component handles the command or where it resides. 
 
 ### Events
 
@@ -117,10 +122,33 @@
 * It is mainly used by the building blocks that Axon provides.
 
 ```
-Note that the Unit of Work is merely a buffer of changes, not a replacement for Transactions. Although all staged changes are only committed when the Unit of Work is committed, its commit is not atomic. That means that when a commit fails, some changes might have been persisted, while others are not. Best practices dictate that a Command should never contain more than one action. If you stick to that practice, a Unit of Work will contain a single action, making it safe to use as-is. If you have more actions in your Unit of Work, then you could consider attaching a transaction to the Unit of Work's commit. Use unitOfWork.onCommit(..) to register actions that need to be taken when the Unit of Work is being committed. 
+Note that the Unit of Work is merely a buffer of changes, not a replacement for Transactions. 
+Although all staged changes are only committed when the Unit of Work is committed, its commit is not atomic. 
+That means that when a commit fails, some changes might have been persisted, while others are not. 
+Best practices dictate that a Command should never contain more than one action. 
+If you stick to that practice, a Unit of Work will contain a single action, making it safe to use as-is. 
+If you have more actions in your Unit of Work, then you could consider attaching a transaction to the Unit of Work's commit.
+Use unitOfWork.onCommit(..) to register actions that need to be taken when the Unit of Work is being committed. 
 ```
 
-* 
+## Command Model
+
+  A state change within an application starts with a Command. 
+  A Command is a combination of expressed intent (which describes what you want done).
+  As well as the information required to undertake action based on that intent.
+  
+### Aggregate
+
+* An Aggregate is an entity or group of entities that is always kept in a consistent state.
+* The Aggregate Root is the object on top of the aggregate tree that is responsible for maintaining this consistent state. 
+* This makes the Aggregate the prime building block for implementing a Command Model
+```
+The term "Aggregate" refers to the aggregate as defined by Evans in Domain Driven Design:
+
+“A cluster of associated objects that are treated as a unit for the purpose of data changes. 
+External references are restricted to one member of the Aggregate, designated as the root. 
+A set of consistency rules applies within the Aggregate's boundaries.”
+```
 * 
 * 
 * 
